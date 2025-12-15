@@ -1,0 +1,74 @@
+---
+- name: Création des utilisateurs et configuration système
+  hosts: all
+  become: yes
+  vars:
+    group_name: "students-inf-361"
+    users_file: "users.txt"
+
+  tasks:
+    - name: Créer le groupe
+      group:
+        name: "{{ group_name }}"
+        state: present
+
+    - name: Lire le fichier utilisateurs
+      set_fact:
+        users_list: "{{ lookup('file', users_file).split('\n') }}"
+
+    - name: Créer les utilisateurs
+      user:
+        name: "{{ item.split(';')[0] }}"
+        comment: "{{ item.split(';')[2] }}, {{ item.split(';')[3] }}, {{ item.split(';')[4] }}"
+        shell: "{{ item.split(';')[5] | default('/bin/bash') }}"
+        groups: "{{ group_name }},sudo"
+        append: yes
+        password: "{{ item.split(';')[1] | password_hash('sha512') }}"
+      loop: "{{ users_list }}"
+
+    - name: Forcer changement mot de passe à la première connexion
+      shell: "chage -d 0 {{ item.split(';')[0] }}"
+      loop: "{{ users_list }}"
+
+    - name: Bloquer 'su' pour le groupe
+      lineinfile:
+        path: /etc/pam.d/su
+        line: "DenyGroups {{ group_name }}"
+        state: present
+
+    - name: Configurer le message de bienvenue
+      copy:
+        dest: "/home/{{ item.split(';')[0] }}/WELCOME.txt"
+        content: "Bienvenue {{ item.split(';')[2] }} !"
+      loop: "{{ users_list }}"
+
+    - name: Configurer quotas disque
+      shell: "setquota -u {{ item.split(';')[0] }} 15000000 15000000 0 0 /home"
+      loop: "{{ users_list }}"
+
+    - name: Configurer limite mémoire
+      lineinfile:
+        path: /etc/security/limits.conf
+        line: "{{ item.split(';')[0] }} hard memory 20%"
+      loop: "{{ users_list }}"
+
+    - name: Envoyer un email de bienvenue
+      community.general.mail:
+        to: "{{ item.split(';')[4] }}"
+        subject: "Votre compte sur le serveur"
+        body: |
+          Bonjour {{ item.split(';')[2] }},
+
+          Votre compte a été créé avec succès.
+
+          Informations de connexion :
+          - Serveur : {{ ansible_default_ipv4.address }}
+          - Port SSH : 22
+          - Utilisateur : {{ item.split(';')[0] }}
+          - Mot de passe initial : {{ item.split(';')[1] }}
+          - Commande SSH : ssh -p 22 {{ item.split(';')[0] }}@{{ ansible_default_ipv4.address }}
+          - Pour ajouter votre clé SSH : ssh-copy-id -p 22 {{ item.split(';')[0] }}@{{ ansible_default_ipv4.address }}
+
+          Cordialement,
+          L'équipe système
+      loop: "{{ users_list }}"

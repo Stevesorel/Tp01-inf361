@@ -1,0 +1,11 @@
+WOLFDEV;SUCCESS;TAMWO MOTCHEYO STEVE SOREL;+23764443434342;motcheyo@example.com;/bin/bash
+ngouanfo_jean;Secret456;Jean Ngouanfo;+237688888888;jean.ngouanfo@example.com;/bin/bash
+mboua_marie;Pass789;Marie Mboua;+237677777777;marie.mb@example.com;/bin/zsh
+tchoumba_pierre;MyPass321;Pierre Tchoumba;+237666666666;pierre.tch@example.com;/bin/bash
+ndjock_sylvie;Pwd12345;Sylvie Ndjock;+237655555555;sylvie.ndjock@example.com;/bin/bash
+WOLFDEVS;SUCCESS;TAMWO MOTCHEYOGR STEVE SOREL;+23764443434342;motcheyo@example.com;/bin/bash
+WOLFDEVF;SUCCESS;TAMWO MOTCHEYOR STEVE SOREL;+23764443434342;motcheyo@example.com;/bin/bash
+WOLFDEVG;SUCCESS;TAMWO MOTCHEYXO STEVE SOREL;+23764443434342;motcheyo@example.com;/bin/bash
+WOLFDEVB;SUCCESS;TAMWO MOTCHEYOX STEVE SOREL;+23764443434342;motcheyo@example.com;/bin/bash
+WOLFDEVN;SUCCESS;TAMWO MOTCHEXYO STEVE SOREL;+23764443434342;motcheyo@example.com;/bin/bash
+WOLFDEVD;SUCCESS;TAMWO MOTCHEYGO STEVE SOREL;+23764443434342;motcheyo@example.com;/bin/bash
