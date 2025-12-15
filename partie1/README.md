@@ -57,7 +57,7 @@ username;password_haché;nom_complet;téléphone;email;shell
 jdupont;$6$abcd1234$xyz...;Jean Dupont;690000000;jean.dupont@mail.com;/bin/bash
 ```
 
-⚠️ Le mot de passe doit être **haché** (ex : SHA-512).
+ Le mot de passe doit être **haché** (ex : SHA-512).
 
 ---
 

@@ -89,7 +89,7 @@ ssh_user    = "admin"
 ssh_password = "password123"
 ```
 
-⚠️ En production, l’authentification par **clé SSH** est fortement recommandée.
+ En production, l’authentification par **clé SSH** est fortement recommandée.
 
 ---
 

@@ -63,7 +63,7 @@ username;password;nom_complet;téléphone;email;shell
 jdupont;password123;Jean Dupont;690000000;jean.dupont@mail.com;/bin/bash
 ```
 
-⚠️ Le mot de passe est automatiquement **haché en SHA-512** par Ansible.
+ Le mot de passe est automatiquement **haché en SHA-512** par Ansible.
 
 ---
 
